@@ -14,10 +14,16 @@ type queueNode struct {
 func (receiver *queue) Len() int {
 	return receiver.size
 }
-func (receiver *queue) First() *queueNode {
+func (receiver *queue) First() interface{} {
+	if receiver.first == nil {
+		return nil
+	}
 	return receiver.first
 }
-func (receiver *queue) Last() *queueNode {
+func (receiver *queue) Last() interface{} {
+	if receiver.last == nil {
+		return nil
+	}
 	return receiver.last
 }
 func (receiver *queue) equeue(addElement interface{}) {
@@ -27,12 +33,12 @@ func (receiver *queue) equeue(addElement interface{}) {
 			next:  nil,
 			prev:  nil,
 		}
-		receiver.last = receiver.First()
+		receiver.last = receiver.first
 		receiver.size++
 		return
 	}
 	receiver.size++
-	current := receiver.First()
+	current := receiver.first
 	for {
 		if current.next == nil {
 			current.next = &queueNode{
@@ -40,12 +46,11 @@ func (receiver *queue) equeue(addElement interface{}) {
 				nil,
 				current,
 			}
-			return
 		}
 		current = current.next
 	}
 }
-func (receiver *queue) dequeue() {
+func (receiver *queue) dequeue() queue {
 	if receiver.Len() == 0 {
 		return
 	}
