@@ -18,13 +18,13 @@ func (receiver *queue) First() interface{} {
 	if receiver.first == nil {
 		return nil
 	}
-	return receiver.first
+	return receiver.first.value
 }
 func (receiver *queue) Last() interface{} {
 	if receiver.last == nil {
 		return nil
 	}
-	return receiver.last
+	return receiver.last.value
 }
 func (receiver *queue) equeue(addElement interface{}) {
 	if receiver.Len() == 0 {
@@ -46,6 +46,8 @@ func (receiver *queue) equeue(addElement interface{}) {
 				nil,
 				current,
 			}
+			receiver.last = current.next
+			return
 		}
 		current = current.next
 	}
