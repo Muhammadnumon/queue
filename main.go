@@ -50,7 +50,8 @@ func (receiver *queue) equeue(addElement interface{}) {
 		current = current.next
 	}
 }
-func (receiver *queue) dequeue() queue {
+func (receiver *queue) dequeue() interface{} {
+	element := receiver.first.value
 	if receiver.Len() == 0 {
 		return nil
 	}
@@ -61,7 +62,7 @@ func (receiver *queue) dequeue() queue {
 		receiver.size--
 		return element
 	}
-	receiver.first.prev = nil
+	receiver.first = receiver.first.next
 	receiver.size--
 	return element
 }
