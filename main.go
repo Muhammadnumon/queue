@@ -52,17 +52,17 @@ func (receiver *queue) equeue(addElement interface{}) {
 }
 func (receiver *queue) dequeue() queue {
 	if receiver.Len() == 0 {
-		return queue{}
+		return nil
 	}
 
 	if receiver.Len() == 1 {
 		receiver.first = nil
 		receiver.last = nil
 		receiver.size--
-		return queue{}
+		return element
 	}
 	receiver.first.prev = nil
 	receiver.size--
-	return queue{}
+	return element
 }
 func main() {}
