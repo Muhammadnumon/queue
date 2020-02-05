@@ -48,9 +48,7 @@ func Test_queue_with_multiple_elements(t *testing.T) {
 }
 func Test_queue_firstElement_lastElement(t *testing.T) {
 	q := queue{}
-	q.equeue(1)
 	q.equeue(2)
-	q.equeue(3)
 	if q.First() != q.Last() {
 		t.Error("После добавление одного элемента, первый элемент должен быть равен последнему got:", q.First())
 	}
