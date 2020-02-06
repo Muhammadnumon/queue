@@ -48,9 +48,17 @@ func Test_queue_with_multiple_elements(t *testing.T) {
 }
 func Test_queue_firstElement_lastElement(t *testing.T) {
 	q := queue{}
-	q.equeue(2)
-	if q.First() != q.Last() {
-		t.Error("После добавление одного элемента, первый элемент должен быть равен последнему got:", q.First())
+	q.equeue(3)
+	q.equeue(4)
+	q.equeue(5)
+	if q.First() != 3 {
+		t.Error("Первый элемент должен быть 3, got:", q.First())
+	}
+	if q.Last() != 5 {
+		t.Error("Последный элемент должен быть 5, got:", q.Last())
+	}
+	if q.First() == q.Last() {
+		t.Error("Когда добавили 3 элемента, первый элемент не может быть равен последнему, got:", q.First(), q.Last())
 	}
 }
 func Test_queue_deleting_first_element(t *testing.T) {
